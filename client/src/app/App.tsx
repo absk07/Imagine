@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Result from '../pages/Result';
 import Credit from '../pages/Credit';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path='/buy-unknown-credit' element={<Credit />} />
         <Route path='*' element={<h1>404 Not Found!</h1>} />
       </Routes>
+      <Footer />
     </div>
   )
 }

@@ -28,16 +28,16 @@ export const stepsData: Step[] = [
 const Body: React.FC = () => {
     return (
         <div className='flex flex-col items-center justify-center my-32'>
-            <h1 className='text-3xl sm:text-4xl font-semibold mb-2 text-black'>Try it Yourself !</h1>
+            <h1 className='text-3xl sm:text-4xl font-semibold mb-2 text-white'>Try it Yourself !</h1>
             <p className='text-lg text-gray-300 mb-8'>Transform Words Into Stunning Images</p>
-            <div className='space-y-4 w-full max-w-3xl text-sm'>
+            <div className='space-y-6 w-full max-w-3xl text-sm'>
                 {
                     stepsData.map((step, idx) => (
-                        <div key={idx} className='flex items-center gap-4 p-5 px-8 bg-white/20 shadow-2xl border cursor-pointer hover:scale-[1.02] transition-all duration-300 rounded-lg'>
+                        <div key={idx} className='flex items-center gap-4 p-5 px-8 bg-white/30 shadow-2xl border cursor-pointer hover:scale-[1.02] transition-all duration-300 rounded-lg'>
                             <img src={step.icon} alt='' width={40} />
                             <div>
-                                <h2 className='text-xl font-medium'>{step.title}</h2>
-                                <p className='text-gray-950'>{step.description}</p>
+                                <h2 className='text-xl font-medium text-black'>{step.title}</h2>
+                                <p className='text-black'>{step.description}</p>
                             </div>
                         </div>
                     ))
