@@ -1,9 +1,14 @@
 import React from 'react';
+import Jumbotron from '../components/Jumbotron';
+import Body from '../components/Body';
+import Description from '../components/Description';
 
 const Home: React.FC = () => {
     return (
         <div>
-            Home
+            <Jumbotron />
+            <Body />
+            <Description />
         </div>
     )
 }
