@@ -33,7 +33,7 @@ const Credit: React.FC = () => {
     const user = useAppSelector(state => state.user.user);
 
     return (
-        <div className='min-h-[80vh] text-center pt-14 mb-10'>
+        <div className='min-h-[70vh] text-center pt-14 mb-10'>
             <h1 className='text-center text-4xl font-medium mb-6 sm:mb-10 text-white'>Pricing plans for creators</h1>
             <div className='flex flex-wrap justify-center gap-6 text-left'>
                 {
@@ -44,7 +44,7 @@ const Credit: React.FC = () => {
                             <p className='mt-6'>
                                 <span className='text-3xl font-medium'>${plan.price}</span> / {plan.credits} credits
                             </p>
-                            <button className='w-full bg-black text-orange-600 mt-8 text-sm rounded-md py-2.5 min-w-52'>
+                            <button className='w-full bg-black text-orange-600 mt-8 text-sm rounded-md py-2.5 min-w-52 cursor-pointer'>
                                 {user ? 'Purchased' : 'Buy Plan'}
                             </button>
                         </div>
