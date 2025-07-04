@@ -34,7 +34,7 @@ const Result: React.FC = () => {
             <div>
                 <div className='relative'>
                     <img src={image} alt='' className='max-w-sm rounded' />
-                    <span className='absolute bottom-0 left-0 h-1 bg-blue-500  w-full transition-all duration-[10s]' />
+                    <span className={`absolute bottom-0 left-0 h-1 bg-blue-500 ${isLoading ? 'w-full transition-all duration-[10s]' : 'w-0'}`} />
                 </div>
                 {
                   isLoading && (
@@ -74,7 +74,7 @@ const Result: React.FC = () => {
             {
                 isImageloaded && (
                     <div className='flex gap-2 flex-wrap justify-center text-white text-sm p-0.5 mt-10 rounded-full'>
-                        <p className='inline-flex items-center gap-2 px-12 py-3 rounded-full bg-black text-white m-auto border border-orange-600 shadow-[0_0_16px_4px_rgba(0,0,0,0.7)] hover:scale-105 transition-all duration-700'>
+                        <p onClick={() => setIsImageLoaded(false)} className='inline-flex items-center gap-2 px-12 py-3 rounded-full bg-black text-white m-auto border border-orange-600 shadow-[0_0_16px_4px_rgba(0,0,0,0.7)] hover:scale-105 transition-all duration-700'>
                             Generate Another
                             <img className='h-6' src={assets.star_group} alt='' />
                         </p>
