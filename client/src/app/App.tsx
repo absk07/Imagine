@@ -5,11 +5,18 @@ import Result from '../pages/Result';
 import Credit from '../pages/Credit';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Login from '../components/Login';
+import { useAppSelector } from './hooks';
 
 const App: React.FC = () => {
+  const showLogin = useAppSelector(state => state.user.showLogin);
+
   return (
     <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen bg-gradient-to-b from-black via-gray-900 to-orange-600'>
       <Navbar />
+      {
+        showLogin && <Login />
+      }
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/result' element={<Result />} />

@@ -37,7 +37,7 @@ const Credit: React.FC = () => {
             <h1 className='text-center text-4xl font-medium mb-6 sm:mb-10 text-white'>Pricing plans for creators</h1>
             <div className='flex flex-wrap justify-center gap-6 text-left'>
                 {
-                    plans.map((plan) => (
+                    plans?.map((plan) => (
                         <div key={plan.id} className='w-80 bg-white/30 drop-shadow-sm border rounded-lg py-12 px-8 text-gray-300 hover:scale-105 hover:border-orange-600 transition-all duration-500'>
                             <p className='text-2xl mt-3 mb-1 font-semibold text-white'>{plan.id}</p>
                             <p className='text-sm break-words'>{plan.desc}</p>

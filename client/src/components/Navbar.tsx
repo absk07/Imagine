@@ -2,11 +2,14 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import { assets } from '../assets/assets';
+import { useAppDispatch } from '../app/hooks';
+import { setShowLogin } from '../features/user/user';
 
 const Navbar: React.FC = () => {
     const user = useAppSelector(state => state.user.user);
 
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     return (
         <div className='flex items-center justify-between py-4'>
@@ -34,7 +37,7 @@ const Navbar: React.FC = () => {
                     ) : (
                         <div className='flex items-center gap-2 sm:gap-5'>
                             <p onClick={() => navigate('/buy-unknown-credit')} className='cursor-pointer text-gray-300'>Pricing</p>
-                            <button className='cursor-pointer bg-orange-500 text-black px-7 py-2 sm:px-10 text-sm font-medium rounded-full'>Login</button>
+                            <button onClick={() => dispatch(setShowLogin(true))} className='cursor-pointer bg-orange-500 text-black px-7 py-2 sm:px-10 text-sm font-medium rounded-full'>Login</button>
                         </div>
                     )
                 }
