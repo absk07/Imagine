@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import { assets } from '../assets/assets';
 import { useAppDispatch } from '../app/hooks';
 import { setShowLogin } from '../features/user/user'
@@ -17,7 +18,7 @@ const Login: React.FC = () => {
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center'>
-            <form className='relative bg-white p-10 rounded-xl text-slate-500'>
+            <form className='w-96 sm:w-auto relative bg-white p-10 rounded-xl text-slate-500'>
                 <h1 className='text-center text-2xl text-neutral-900 font-medium'>{modalState}</h1>
                 {
                     modalState === 'Sign In' ? (
@@ -43,9 +44,13 @@ const Login: React.FC = () => {
                     <input type='password' placeholder='Password' className='outline-none text-sm' required />
                 </div>
                 <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot password?</p>
-                <button className='bg-black w-full text-white hover:text-orange-600 py-2 rounded-full cursor-pointer'>
+                <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className='bg-black w-full text-white hover:text-orange-600 py-2 rounded-full cursor-pointer'
+                >
                     {modalState === 'Sign In' ? 'Sign In' : 'Sign Up'}
-                </button>
+                </motion.button>
                 {
                     modalState === 'Sign In' ? (
                         <p className='mt-5 text-center'>
