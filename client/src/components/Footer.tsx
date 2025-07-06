@@ -4,7 +4,7 @@ import { assets } from '../assets/assets';
 const Footer: React.FC = () => {
     return (
         <div>
-            <div className='flex items-center justify-between gap-4 py-3 mt-20'>
+            <div className='flex items-center justify-between gap-4 py-3 mt-20 '>
                 <img src={assets.logo} alt='' width={150} />
                 <p className='flex pl-4 text-sm text-black max-sm:hidden'>Copyright @Imagine | All rights reserved.</p>
                 <div className='flex gap-2.5'> 

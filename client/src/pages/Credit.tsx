@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../app/hooks';
+import { motion } from 'motion/react';
 
 export interface Plan {
   id: string;
@@ -33,7 +34,13 @@ const Credit: React.FC = () => {
     const user = useAppSelector(state => state.user.user);
 
     return (
-        <div className='min-h-[70vh] text-center pt-14 mb-10'>
+        <motion.div
+          initial={{ opacity: 0.2, y: 120 }}
+          transition={{ duration: 1 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className='min-h-[70vh] text-center pt-14 mb-10'
+        >
             <h1 className='text-center text-4xl font-medium mb-6 sm:mb-10 text-white'>Pricing plans for creators</h1>
             <div className='flex flex-wrap justify-center gap-6 text-left'>
                 {
@@ -51,7 +58,7 @@ const Credit: React.FC = () => {
                     ))
                 }
             </div>
-        </div>
+        </motion.div>
     )
 }
 

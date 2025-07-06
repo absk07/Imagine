@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { motion as fmotion } from 'framer-motion';
 import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
@@ -18,6 +19,34 @@ const Jumbotron: React.FC = () => {
             dispatch(setShowLogin(true));
         }
     }
+
+    const sentence = 'Bring your imagination to life - just type a prompt and watch AI instantly turn your words into breathtaking visuals.';
+
+    const words = sentence.split(' ');
+
+    const container = {
+        hidden: { opacity: 0 },
+        visible: (i = 1) => ({
+            opacity: 1,
+            transition: {
+            staggerChildren: 0.04,
+            delayChildren: 0.3 * i,
+            },
+        }),
+    };
+
+    const child = {
+        hidden: { opacity: 0, x: -20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: {
+            type: 'spring' as const,
+            damping: 12,
+            stiffness: 100,
+            },
+        },
+    };
 
     return (
         <motion.div 
@@ -40,17 +69,28 @@ const Jumbotron: React.FC = () => {
                 AI Powered <br /> 
                 <span className='text-orange-500 leading-[0.70em] outline-none animate-dimlight box-reflect'>Image</span> Generation.
             </motion.h1>
-            <motion.p 
+            <fmotion.p 
                 className='text-center max-w-xl mx-auto mt-5 text-gray-300'
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
+                // initial={{ opacity: 0, y: 20 }}
+                // animate={{ opacity: 1, y: 1 }}
+                // transition={{ duration: 0.8, delay: 0.6 }}
+                variants={container}
+                initial='hidden'
+                animate='visible'
             >
-                Bring your imagination to life - just type a prompt and watch AI instantly turn your words into breathtaking visuals.
-            </motion.p>
+                {words.map((word, index) => (
+                    <fmotion.span 
+                        key={index} 
+                        variants={child} 
+                        className='inline-block mr-1'
+                    >
+                        {word}
+                    </fmotion.span>
+                ))}
+            </fmotion.p>
             <motion.button
                 onClick={onClickHandler}
-                className='sm:text-lg text-gray-300 bg-black w-auto mt-8 mx-12 px-12 py-2.5 flex items-center gap-2 rounded-full border border-orange-600 shadow-[0_0_16px_4px_rgba(255,140,0,0.7)]'
+                className='sm:text-lg text-gray-300 bg-black w-auto mt-8 mx-12 px-12 py-2.5 flex items-center gap-2 rounded-full cursor-pointer border border-orange-600 shadow-[0_0_16px_4px_rgba(255,140,0,0.7)]'
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0 }}

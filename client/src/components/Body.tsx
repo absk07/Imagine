@@ -1,5 +1,6 @@
 import React from 'react';
 import { assets } from '../assets/assets';
+import { motion } from 'motion/react';
 
 export interface Step {
     title: string;
@@ -27,13 +28,22 @@ export const stepsData: Step[] = [
 
 const Body: React.FC = () => {
     return (
-        <div className='flex flex-col items-center justify-center my-32'>
+        <motion.div 
+            className='flex flex-col items-center justify-center my-32'
+            initial={{ opacity: 0.2, y: 120 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+        >
             <h1 className='text-3xl sm:text-4xl font-semibold mb-2 text-white'>Try it Yourself !</h1>
             <p className='text-lg text-gray-300 mb-8'>Transform Words Into Stunning Images</p>
             <div className='space-y-6 w-full max-w-3xl text-sm'>
                 {
                     stepsData.map((step, idx) => (
-                        <div key={idx} className='flex items-center gap-4 p-5 px-8 bg-white/30 shadow-2xl border cursor-pointer hover:scale-[1.02] transition-all duration-300 rounded-lg'>
+                        <div
+                            key={idx} 
+                            className='flex items-center gap-4 p-5 px-8 bg-white/30 shadow-2xl border cursor-pointer hover:scale-[1.02] transition-all duration-300 rounded-lg'
+                        >
                             <img src={step.icon} alt='' width={40} />
                             <div>
                                 <h2 className='text-xl font-medium text-black'>{step.title}</h2>
@@ -43,7 +53,7 @@ const Body: React.FC = () => {
                     ))
                 }
             </div>
-        </div>
+        </motion.div>
     )
 }
 

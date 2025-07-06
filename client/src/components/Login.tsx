@@ -17,8 +17,14 @@ const Login: React.FC = () => {
     }, []);
 
     return (
-        <div className='absolute top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center'>
-            <form className='w-96 sm:w-auto relative bg-white p-10 rounded-xl text-slate-500'>
+        <div className='fixed top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center'>
+            <motion.form
+                initial={{ opacity: 0.2, y: 50 }}
+                transition={{ duration: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className='w-96 sm:w-auto relative bg-white p-10 rounded-xl text-slate-500'
+            >
                 <h1 className='text-center text-2xl text-neutral-900 font-medium'>{modalState}</h1>
                 {
                     modalState === 'Sign In' ? (
@@ -63,7 +69,7 @@ const Login: React.FC = () => {
                     )
                 }
                 <img onClick={() => dispatch(setShowLogin(false))} src={assets.cross_icon} alt='' className='absolute top-5 right-5 cursor-pointer' />
-            </form>
+            </motion.form>
         </div>
     )
 }

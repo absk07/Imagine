@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { assets } from '../assets/assets';
+import { motion } from 'motion/react';
 
 const Result: React.FC = () => {
     const [prompt, setPrompt] = useState<string>('');
@@ -30,7 +31,13 @@ const Result: React.FC = () => {
         //         <button type='submit' className='bg-zinc-900 px-10 sm:px-16 py-3 rounded-full'>Generate</button>
         //     </div>
         // </form>
-        <form className='flex flex-col min-h-[90vh] justify-center items-center'>
+        <motion.form
+            initial={{ opacity: 0.2, y: 120 }}
+            transition={{ duration: 1 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className='flex flex-col min-h-[90vh] justify-center items-center'
+        >
             <div>
                 <div className='relative'>
                     <img src={image} alt='' className='max-w-sm rounded' />
@@ -85,7 +92,7 @@ const Result: React.FC = () => {
                     </div>
                 )
             }
-        </form>
+        </motion.form>
     )
 }
 
