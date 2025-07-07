@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import connectDB from './config/db.ts';
+import connectDB from './config/db';
 
 const app = express();
 
@@ -15,8 +15,8 @@ connectDB().then(() =>
 
 const port = process.env.PORT || 3000;
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World');
+app.get('/ping', (req: Request, res: Response) => {
+    res.json({ message: 'pong' });
 });
 
 app.listen(port, () => {
