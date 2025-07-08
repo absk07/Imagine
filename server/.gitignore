@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .env
+imagine-f921c-firebase-adminsdk-fbsvc-01736a76ed.json
 
 # Editor directories and files
 .vscode/*
