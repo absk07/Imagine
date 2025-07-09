@@ -11,6 +11,14 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
         return;
     }
     try {
+        const existingUser = await auth.getUserByEmail(email);
+        if (existingUser) {
+            res.status(400).json({
+                success: false,
+                message: 'User already exists' 
+            });
+            return;
+        }
         const user = await auth.createUser({ email, password });
         // Generate a custom token for the user's UID
         const token = await auth.createCustomToken(user.uid);
