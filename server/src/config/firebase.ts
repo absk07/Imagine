@@ -1,10 +1,8 @@
 import { initializeApp, cert, ServiceAccount, App } from 'firebase-admin/app';
-import { getAuth, Auth } from 'firebase-admin/auth';
 import { getFirestore, Firestore } from 'firebase-admin/firestore';
 import Firebase_SA from '../../imagine-f921c-firebase-adminsdk-fbsvc-01736a76ed.json';
 
 let app: App;
-let auth: Auth;
 let db: Firestore;
 
 const initializeFirebaseApp = (): void => {
@@ -16,7 +14,6 @@ const initializeFirebaseApp = (): void => {
         app = initializeApp({
             credential: cert(Firebase_SA as ServiceAccount),
         });
-        auth = getAuth(app);
         db = getFirestore(app);
         console.log('Firebase app initialized successfully');
     } catch (err: any) {
@@ -25,4 +22,4 @@ const initializeFirebaseApp = (): void => {
     }
 }
 
-export { initializeFirebaseApp, app, auth, db };
+export { initializeFirebaseApp, app, db };
