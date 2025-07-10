@@ -51,8 +51,9 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
         });
     } catch (err: any) {
         console.error('Error registering user:', err);
-        res.status(500).json({ 
-            error: 'Failed to register user' 
+        res.status(500).json({
+            success: false,
+            message: 'Failed to register user' 
         });
     }
 };
@@ -101,8 +102,9 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         });
     } catch (err: any) {
         console.error('Error logging in user:', err);
-        res.status(500).json({ 
-            error: 'Failed to log in user' 
+        res.status(500).json({
+            success: false,
+            message: 'Failed to log in user' 
         });
     }
 };
