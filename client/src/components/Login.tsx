@@ -1,13 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
 import { useAppDispatch } from '../app/hooks';
-import { setShowLogin } from '../features/user/user'
+import { setShowLogin, setToken, setUser } from '../features/user/user'
+import { useLoginMutation } from '../features/user/userApi';
 
 const Login: React.FC = () => {
     const [modalState, setModalState] = useState<string>('Sign In');
+    const [ userDetails, setUserDetails ] = useState<{ username: string; email: string; password: string }>({
+        username: '',
+        email: '',
+        password: ''
+    });
+    const [login, { isLoading, error }] = useLoginMutation();
+
 
     const dispatch = useAppDispatch();
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserDetails(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
+    };
+
+    const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            if (modalState === 'Sign In') {
+                const { data } = await login({ email: userDetails.email, password: userDetails.password });
+                if (data?.success) {
+                    dispatch(setToken(data.token));
+                    dispatch(setUser(data.user));
+                    dispatch(setShowLogin(false));
+                    toast.success(data.message);
+                }
+                // if (error?.data?.message) {
+                //     toast.error(error.data.message);
+                // }
+                console.log(data);
+                // console.log(error);
+            }
+        } catch (err: any) {
+            console.error('Error during login:', err);
+            toast.error('Something went wrong.');
+        } finally {
+            setUserDetails({ username: '', email: '', password: '' });
+            dispatch(setShowLogin(false));
+        }
+    };
 
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -19,6 +58,7 @@ const Login: React.FC = () => {
     return (
         <div className='fixed top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center'>
             <motion.form
+                onSubmit={onSubmitHandler}
                 initial={{ opacity: 0.2, y: 50 }}
                 transition={{ duration: 0.3 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -37,17 +77,17 @@ const Login: React.FC = () => {
                     modalState !== 'Sign In' && (
                         <div className='border border-gray-500 rounded-full p-2 flex items-center gap-2 mt-5'>
                             <img src={assets.profile_icon} alt='' width={25} />
-                            <input type='text' placeholder='Full name' className='outline-none text-sm' required />
+                            <input type='text' placeholder='Username' name='username' onChange={handleInputChange} value={userDetails.username} className='outline-none text-sm' required />
                         </div>
                     )
                 }
                 <div className='border border-gray-500 rounded-full p-2 flex items-center gap-2 mt-4'>
                     <img src={assets.email_icon} alt='' width={13} />
-                    <input type='email' placeholder='Email' className='outline-none text-sm' required />
+                    <input type='email' placeholder='Email' name='email' onChange={handleInputChange} value={userDetails.email} className='outline-none text-sm' required />
                 </div>
                 <div className='border border-gray-500 rounded-full p-2 flex items-center gap-2 mt-4'>
                     <img src={assets.lock_icon} alt='' width={10} />
-                    <input type='password' placeholder='Password' className='outline-none text-sm' required />
+                    <input type='password' placeholder='Password' name='password' onChange={handleInputChange} value={userDetails.password} className='outline-none text-sm' required />
                 </div>
                 <p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot password?</p>
                 <motion.button

@@ -3,14 +3,18 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface UserState {
   user: {
-    name: string
+    username: string
   } | null,
   showLogin: boolean,
+  token: string | null,
+  uc: boolean,
 }
 
 const initialState: UserState = {
   user: null,
   showLogin: false,
+  token: localStorage.getItem('token'),
+  uc: false
 }
 
 export const userSlice = createSlice({
@@ -22,11 +26,17 @@ export const userSlice = createSlice({
     },
     setShowLogin(state, action: PayloadAction<boolean>) {
       state.showLogin = action.payload;
+    },
+    setToken() {
+
+    },
+    setCredit() {
+
     }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { setUser, setShowLogin } = userSlice.actions;
+export const { setUser, setShowLogin, setToken, setCredit } = userSlice.actions;
 
 export default userSlice.reducer;
