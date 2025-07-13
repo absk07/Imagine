@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Login from '../components/Login';
 import { useAppSelector } from './hooks';
+import { ToastContainer } from 'react-toastify';
 
 const App: React.FC = () => {
   const showLogin = useAppSelector(state => state.user.showLogin);
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         <Route path='*' element={<h1>404 Not Found!</h1>} />
       </Routes>
       <Footer />
+      <ToastContainer />
     </div>
   )
 }
