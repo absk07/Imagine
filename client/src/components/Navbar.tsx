@@ -3,13 +3,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import { assets } from '../assets/assets';
 import { useAppDispatch } from '../app/hooks';
-import { setShowLogin } from '../features/user/user';
+import { setShowLogin, logout } from '../features/user/user';
 
 const Navbar: React.FC = () => {
     const user = useAppSelector(state => state.user.user);
+    const uc = useAppSelector(state => state.user.uc);
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/'); // Redirect to homepage
+    };
 
     return (
         <div className='flex items-center justify-between py-4'>
@@ -22,14 +28,14 @@ const Navbar: React.FC = () => {
                         <div className='flex items-center gap-2 sm:gap-3 '>
                             <button onClick={() => navigate('/buy-unknown-credit')} className='flex items-center gap-2 bg-orange-500 px-4 sm:px-6 py-1.5 sm:py-3 rounded-full hover:scale-105 transition-all duration-700'>
                                 <img src={assets.credit_star} alt='' className='w-5' />
-                                <p className='text-xs sm:text-sm font-medium'>UC left: 50</p>
+                                <p className='text-xs sm:text-sm font-medium'>UC: {uc}</p>
                             </button>
                             <p className='text-gray-300 max:sm-hidden pl-4'>Hi, {user?.username}</p>
                             <div className='relative group'>
                                 <img src={assets.profile_icon} alt='' className='w-10 drop-shadow' />
                                 <div className='absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-12'>
                                     <ul className='list-none m-0 p-2 bg-orange-500 rounded-md border text-sm'>
-                                        <li className='py-1 px-2 cursor-pointer font-medium'>Logout</li>
+                                        <li onClick={handleLogout} className='py-1 px-2 cursor-pointer font-medium'>Logout</li>
                                     </ul>
                                 </div>
                             </div>

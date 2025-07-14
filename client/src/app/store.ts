@@ -7,7 +7,8 @@ export const store = configureStore({
         user: userReducer,
         [userApi.reducerPath]: userApi.reducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware),
+    devTools: import.meta.env.VITE_ENV !== 'production'
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
