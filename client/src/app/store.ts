@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from '../features/user/user';
-import { userApi } from '../features/user/userApi';
+import userReducer from '../features/user/userSlice';
+import { userApi } from '../api/userApi';
+import { imageGenApi } from '../api/imageApi';
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
-        [userApi.reducerPath]: userApi.reducer
+        [userApi.reducerPath]: userApi.reducer,
+        [imageGenApi.reducerPath]: imageGenApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware).concat(imageGenApi.middleware),
     devTools: import.meta.env.VITE_ENV !== 'production'
 })
 

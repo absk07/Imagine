@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
 import { useAppDispatch } from '../app/hooks';
-import { setShowLogin, setToken, setUser } from '../features/user/user'
-import { useLoginMutation, useRegisterMutation } from '../features/user/userApi';
+import { setShowLogin, setToken, setUser } from '../features/user/userSlice'
+import { useLoginMutation, useRegisterMutation } from '../api/userApi';
 
 const Login: React.FC = () => {
     const [modalState, setModalState] = useState<string>('Sign In');
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
         setUserDetails(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
     };
 
-    const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
 
         if (modalState === 'Sign In') {

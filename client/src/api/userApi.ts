@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import type { RootState } from '../../app/store';
+import type { RootState } from '../app/store';
 
 const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/v1';
 

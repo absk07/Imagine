@@ -4,7 +4,7 @@ import { motion as fmotion } from 'framer-motion';
 import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setShowLogin } from '../features/user/user';
+import { setShowLogin } from '../features/user/userSlice';
 
 const Jumbotron: React.FC = () => {
     const user = useAppSelector(state => state.user.user);
@@ -14,7 +14,7 @@ const Jumbotron: React.FC = () => {
 
     const onClickHandler = () => {
         if (user) {
-            navigate('/result');
+            navigate('/text-to-image');
         } else {
             dispatch(setShowLogin(true));
         }

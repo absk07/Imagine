@@ -1,36 +1,20 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import Result from '../pages/Result';
-import Credit from '../pages/Credit';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import Login from '../components/Login';
-import { useAppDispatch, useAppSelector } from './hooks';
-import { toast, ToastContainer } from 'react-toastify';
-import { useUnknowncreditQuery } from '../features/user/userApi';
-import { setCredit, setUser } from '../features/user/user';
+import Home from './pages/Home';
+import Result from './pages/Result';
+import Credit from './pages/Credit';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Login from './components/Login';
+import { useAppSelector } from './app/hooks';
+import { ToastContainer } from 'react-toastify';
+import { useLoadUnknownCredit } from './hooks/useGetUC';
 
 const App: React.FC = () => {
   const showLogin = useAppSelector(state => state.user.showLogin);
   const token = useAppSelector(state => state.user.token);
 
-  const dispatch = useAppDispatch();
-
-  const { refetch } = useUnknowncreditQuery();
-
-  const loadUnknownCredit = async () => {
-    const res = await refetch();
-
-    if ('data' in res) {
-      dispatch(setCredit(res.data?.uc));
-      dispatch(setUser(res?.data?.user))
-    } else if ('error' in res) {
-      const err = res.error as any;
-      console.error('Cannot get uc', err);
-      toast.error(err?.data?.message || 'Something went wrong');
-    }
-  }
+  const { loadUnknownCredit } = useLoadUnknownCredit();
 
   useEffect(() => {
     if (token)
