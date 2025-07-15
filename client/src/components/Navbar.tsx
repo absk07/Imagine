@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import { assets } from '../assets/assets';
 import { useAppDispatch } from '../app/hooks';
-import { setShowLogin, logout } from '../features/user/user';
+import { setShowLogin, logout } from '../features/user/userSlice';
 
 const Navbar: React.FC = () => {
     const user = useAppSelector(state => state.user.user);

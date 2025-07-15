@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setShowLogin } from '../features/user/user';
+import { setShowLogin } from '../features/user/userSlice';
 
 const Button: React.FC = () => {
     const user = useAppSelector(state => state.user.user);
@@ -13,7 +13,7 @@ const Button: React.FC = () => {
 
     const onClickHandler = () => {
         if (user) {
-            navigate('/result');
+            navigate('/text-to-image');
         } else {
             dispatch(setShowLogin(true));
         }
