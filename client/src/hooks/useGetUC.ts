@@ -3,7 +3,7 @@ import { useUnknowncreditQuery } from '../api/userApi';
 import { setCredit, setUser } from '../features/user/userSlice';
 import { toast } from 'react-toastify';
 
-export const useLoadUnknownCredit = () => {
+export const useLoadUnknownCredit = (): { loadUnknownCredit: () => Promise<void> } => {
   const dispatch = useAppDispatch();
 
   const { refetch } = useUnknowncreditQuery();
