@@ -73,6 +73,7 @@ const Result: React.FC = () => {
                             required 
                             value={prompt}
                             onChange={(e) => setPrompt(e.target.value)}
+                            disabled={isGenImageLoading}
                         />
                         <div className='flex items-center justify-between text-sm'>
                             <button type='submit' className='bg-black rounded-full p-4 m-2 cursor-pointer' disabled={isGenImageLoading}>

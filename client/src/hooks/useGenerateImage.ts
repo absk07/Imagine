@@ -25,6 +25,9 @@ export const useGenerateImage = (): [(prompt: string) => Promise<string | null>,
             const err = response.error as any;
             console.error('Unable to generate image:', err);
             toast.error(err?.data?.message || 'Unable to generate image');
+            if (err?.data?.message === 'Insufficient UC') {
+                navigate('/buy-unknown-credit');
+            }
         }
 
         return null;
