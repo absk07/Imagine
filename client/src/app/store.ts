@@ -2,14 +2,16 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../features/user/userSlice';
 import { userApi } from '../api/userApi';
 import { imageGenApi } from '../api/imageApi';
+import { rpzPaymentApi } from '../api/paymentApi';
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
         [userApi.reducerPath]: userApi.reducer,
         [imageGenApi.reducerPath]: imageGenApi.reducer,
+        [rpzPaymentApi.reducerPath]: rpzPaymentApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware).concat(imageGenApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(userApi.middleware).concat(imageGenApi.middleware).concat(rpzPaymentApi.middleware),
     devTools: import.meta.env.VITE_ENV !== 'production'
 })
 
