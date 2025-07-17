@@ -42,7 +42,7 @@ const Credit: React.FC = () => {
   const [ rpzPayment, { isLoading } ] = useRpzPaymentMutation();
 
   const initRpzPayment = async (order: any) => {
-    
+    const options = {};
   };
 
   const razorpayPayment = async (planId: string): Promise<void> => {
