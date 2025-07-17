@@ -42,7 +42,23 @@ const Credit: React.FC = () => {
   const [ rpzPayment, { isLoading } ] = useRpzPaymentMutation();
 
   const initRpzPayment = async (order: any) => {
-    const options = {};
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      amount: order.amount,
+      currency: order.currency,
+      name: 'Imagine',
+      description: 'Unknown Credit Transaction',
+      // image: 'http://example.com/your_logo',
+      order_id: order.id,
+      receipt: order.receipt,
+      handler: async (response: any) => {
+        console.log(response);
+      }
+    };
+
+    const rzp = new Razorpay(options);
+
+    rzp.open();
   };
 
   const razorpayPayment = async (planId: string): Promise<void> => {
