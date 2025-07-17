@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { toast } from 'react-toastify';
 import { assets } from '../assets/assets';
 import { useAppDispatch } from '../app/hooks';
-import { setShowLogin, setToken, setUser } from '../features/user/userSlice'
+import { setShowLogin, setToken, setUser } from '../features/user/userSlice';
 import { useLoginMutation, useRegisterMutation } from '../api/userApi';
 
 const Login: React.FC = () => {

@@ -87,7 +87,7 @@ export const payment = async (req: AuthenticatedRequest, res: Response): Promise
 
         res.status(200).json({
             success: true,
-            message: 'Payment done.',
+            message: 'Payment Inprogress...',
             order
         });
     } catch (error: any) {
