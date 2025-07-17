@@ -8,8 +8,8 @@ interface AuthenticatedRequest extends Request {
 }
 
 const instance = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
+    key_id: process.env.RAZORPAY_KEY_ID!,
+    key_secret: process.env.RAZORPAY_KEY_SECRET!,
 });
 
 export const payment = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
@@ -98,3 +98,50 @@ export const payment = async (req: AuthenticatedRequest, res: Response): Promise
         });
     }
 };
+
+export const verifyPayment = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { razorpay_order_id } = req.body;
+
+        const orderInfo = await instance.orders.fetch(razorpay_order_id);
+
+        if (orderInfo.status === 'paid') {
+            const tnx = await db.collection('transactions').doc(orderInfo.receipt!).get();
+            
+            const tnxData = tnx?.data();
+            if (tnxData?.payment) {
+                res.json({
+                    success: false,
+                    message: 'Payment failed.'
+                });
+                return;
+            }
+            
+            const user = await db.collection('users').doc(tnxData?.userId).get();
+            const userData = user?.data();
+            
+            const uc = userData?.uc + tnxData?.uc;
+            
+            await db.collection('users').doc(tnxData?.userId).update({ uc: uc });
+
+            await db.collection('transactions').doc(tnx.id).update({ payment: true });
+
+            res.status(200).json({
+                success: true,
+                message: 'Unknown Credit added successfully'
+            });
+            return;
+        }
+
+        res.status(500).json({
+            success: false,
+            message: 'Payment failed.'
+        });
+    } catch (error: any) {
+        console.error('Payment failed', error);
+        res.status(500).json({
+            success: false,
+            message: 'Payment failed.'
+        });
+    }
+}
