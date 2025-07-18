@@ -3,8 +3,9 @@ import { motion } from 'motion/react';
 import { useAppSelector } from '../app/hooks';
 import { setShowLogin } from '../features/user/userSlice';
 import { useLoadUnknownCredit } from '../hooks/useGetUC';
-import { useRpzPaymentMutation } from '../api/paymentApi';
+import { useRpzPaymentMutation, useRpzPaymentVerifyMutation } from '../api/paymentApi';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export interface Plan {
   id: string;
@@ -39,7 +40,10 @@ const Credit: React.FC = () => {
 
   const { loadUnknownCredit } = useLoadUnknownCredit();
 
-  const [ rpzPayment, { isLoading } ] = useRpzPaymentMutation();
+  const [ rpzPayment ] = useRpzPaymentMutation();
+  const [ rpzPaymentVerify ] = useRpzPaymentVerifyMutation();
+
+  const navigate = useNavigate();
 
   const initRpzPayment = async (order: any) => {
     const options = {
@@ -52,7 +56,17 @@ const Credit: React.FC = () => {
       order_id: order.id,
       receipt: order.receipt,
       handler: async (response: any) => {
-        console.log(response);
+        // console.log(response);
+        const res = await rpzPaymentVerify(response);
+        if ('data' in res) {
+          await loadUnknownCredit();
+          navigate('/');
+          toast.success(res?.data?.message || 'Unknown Credit added successfully');
+        } else if ('error' in res) {
+          const err = response.error as any;
+          console.error('Payment failed:', err);
+          toast.error(err?.data?.message || 'Payment failed');
+        }
       }
     };
 

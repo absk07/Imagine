@@ -21,8 +21,15 @@ export const rpzPaymentApi = createApi({
                 method: 'POST',
                 body: planId
             })
+        }),
+        rpzPaymentVerify: build.mutation<any, { razorpay_order_id: string }>({
+            query: (razorpay_order_id) => ({
+                url: '/buy-uc/verify-pay',
+                method: 'POST',
+                body: razorpay_order_id
+            })
         })
     })
 });
 
-export const { useRpzPaymentMutation } = rpzPaymentApi;
+export const { useRpzPaymentMutation, useRpzPaymentVerifyMutation } = rpzPaymentApi;
