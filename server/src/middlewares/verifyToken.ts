@@ -18,7 +18,7 @@ export const verifyToken = async (req: AuthenticatedRequest, res: Response, next
         const token = req.headers.authorization?.replace('Bearer ', '');
     
         if (!token) {
-            res.status(401).json({ success: false, authRequired: true, message: 'Invalid authorization' });
+            res.status(401).json({ success: false, authRequired: true, message: 'Please Login to continue.' });
             return;
         }
     

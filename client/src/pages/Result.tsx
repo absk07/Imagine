@@ -1,9 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useAppSelector } from '../app/hooks';
+import { setShowLogin } from '../features/user/userSlice';
 import { useGenerateImage } from '../hooks/useGenerateImage';
 import { assets } from '../assets/assets';
 import { motion } from 'motion/react';
 
 const Result: React.FC = () => {
+    const user = useAppSelector((state) => state.user.user);
+    
     const [prompt, setPrompt] = useState<string>('');
     const [image, setImage] = useState<string>(assets.sample_img_1);
     const [isImageloaded, setIsImageLoaded] = useState<boolean>(false);
@@ -14,6 +18,10 @@ const Result: React.FC = () => {
 
     const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (!user) {
+            setShowLogin(true);
+        }
 
         if (prompt) {
             const imgUrl = await generateTextToImage(prompt);
