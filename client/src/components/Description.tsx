@@ -14,7 +14,7 @@ const Description: React.FC = () => {
             <h1 className='text-gray-300 text-3xl sm:text-4xl font-semibold mb-2'>See the magic yourself</h1>
             <p className='text-gray-400 mb-8'>Turn your imaginations into visuals</p>
             <div className='flex flex-col gap-5 md:gap-14 md:flex-row items-center'>
-                <img src={assets.sample_img_1} alt='' className='w-80 xl:w-86 rounded-lg' />
+                <img src={assets.sample_img_5} alt='' className='w-80 xl:w-86 rounded-lg' />
                 <div>
                     <h2 className='text-3xl font-medium max-w-lg mb-4'>Introducing AI-Powered Text to Image Generator</h2>
                     <p className='text-black mb-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dignissimos aut, officiis repellendus voluptate necessitatibus ut sit deserunt eum sapiente. Adipisci, debitis officiis fugiat quia veniam soluta facilis dolorem nesciunt.</p>

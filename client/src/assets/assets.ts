@@ -8,6 +8,9 @@ import star_icon from './star_icon.svg';
 import rating_star from './rating_star.svg';
 import sample_img_1 from './sample_img_1.png';
 import sample_img_2 from './sample_img_2.png';
+import sample_img_3 from './sample_img_3.png';
+import sample_img_4 from './sample_img_4.png';
+import sample_img_5 from './sample_img_5.png';
 import profile_img_1 from './profile_img_1.png';
 import profile_img_2 from './profile_img_2.png';
 import step_icon_1 from './step_icon_1.svg';
@@ -31,6 +34,9 @@ export const assets: Record<string, string> = {
   rating_star,
   sample_img_1,
   sample_img_2,
+  sample_img_3,
+  sample_img_4,
+  sample_img_5,
   profile_img_1,
   profile_img_2,
   step_icon_1,

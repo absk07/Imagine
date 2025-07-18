@@ -6,6 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setShowLogin } from '../features/user/userSlice';
 
+const sample_imgs = [
+    assets.sample_img_1,
+    assets.sample_img_2,
+    assets.sample_img_3,
+    assets.sample_img_4,
+    assets.sample_img_5
+];
+
 const Jumbotron: React.FC = () => {
     const user = useAppSelector(state => state.user.user);
 
@@ -107,12 +115,12 @@ const Jumbotron: React.FC = () => {
                 transition={{ duration: 1, delay: 1 }}
             >
                 {
-                    Array(5).fill('').map((_, idx) => {
+                    sample_imgs.map((img, idx) => {
                         return (
                             <motion.img
                                 whileHover={{ scale: 1.05, rotate: 5 }}
                                 key={idx} 
-                                src={idx % 2 == 0 ? assets.sample_img_1 : assets.sample_img_2} 
+                                src={img} 
                                 alt='' 
                                 className='w-50 rounded hover:scale-105 transition-all duration-300 cursor-pointer max-sm:w-10' 
                             />
