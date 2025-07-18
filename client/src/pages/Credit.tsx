@@ -64,7 +64,7 @@ const Credit: React.FC = () => {
           toast.success(res?.data?.message || 'Unknown Credit added successfully');
         } else if ('error' in res) {
           const err = response.error as any;
-          console.error('Payment failed:', err);
+          // console.error('Payment failed:', err);
           toast.error(err?.data?.message || 'Payment failed');
         }
       }
@@ -86,7 +86,7 @@ const Credit: React.FC = () => {
       await initRpzPayment(response?.data?.order);
     } else if ('error' in response) {
       const err = response.error as any;
-      console.error('Payment error:', err);
+      // console.error('Payment error:', err);
       toast.error(err?.data?.message || 'Payment error');
     }
   };

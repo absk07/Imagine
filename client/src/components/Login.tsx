@@ -34,14 +34,14 @@ const Login: React.FC = () => {
     
             if ('data' in response) {
                 const { data } = response;
-                console.log('Login successful:', data);
+                // console.log('Login successful:', data);
                 dispatch(setToken(data.token));
                 dispatch(setUser(data.user));
                 dispatch(setShowLogin(false));
                 toast.success(data.message);
             } else if ('error' in response) {
                 const err = response.error as any;
-                console.error('Login error:', err);
+                // console.error('Login error:', err);
                 toast.error(err?.data?.message || 'Sign in failed');
             }
         } else {
@@ -53,14 +53,14 @@ const Login: React.FC = () => {
     
             if ('data' in response) {
                 const { data } = response;
-                console.log('Registeration successful:', data);
+                // console.log('Registeration successful:', data);
                 dispatch(setToken(data.token));
                 dispatch(setUser(data.user));
                 dispatch(setShowLogin(false));
                 toast.success(data.message);
             } else if ('error' in response) {
                 const err = response.error as any;
-                console.error('Registeration error:', err);
+                // console.error('Registeration error:', err);
                 toast.error(err?.data?.message || 'Sign up failed');
             }
         }

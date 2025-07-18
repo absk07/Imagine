@@ -16,7 +16,7 @@ export const useLoadUnknownCredit = (): { loadUnknownCredit: () => Promise<void>
       dispatch(setUser(res?.data?.user));
     } else if ('error' in res) {
       const err = res.error as any;
-      console.error('Cannot get uc', err);
+      // console.error('Cannot get uc', err);
       toast.error(err?.data?.message || 'Something went wrong');
     }
   };
