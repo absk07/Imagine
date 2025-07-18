@@ -122,7 +122,7 @@ const Jumbotron: React.FC = () => {
                                 key={idx} 
                                 src={img} 
                                 alt='' 
-                                className='w-50 rounded hover:scale-105 transition-all duration-300 cursor-pointer max-sm:w-10' 
+                                className='w-50 rounded hover:scale-105 transition-all duration-300 cursor-pointer max-sm:w-15' 
                             />
                         )
                     })

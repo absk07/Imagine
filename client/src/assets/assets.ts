@@ -1,6 +1,7 @@
 // TypeScript automatically infers types for imported assets via module declarations
-import logo from './logo.svg';
-import logo_icon from './logo_icon.svg';
+// import logo from './logo.svg';
+import imagine_logo from './logo.png';
+// import logo_icon from './logo_icon.svg';
 import facebook_icon from './facebook_icon.svg';
 import instagram_icon from './instagram_icon.svg';
 import twitter_icon from './twitter_icon.svg';
@@ -12,7 +13,7 @@ import sample_img_3 from './sample_img_3.png';
 import sample_img_4 from './sample_img_4.png';
 import sample_img_5 from './sample_img_5.png';
 import profile_img_1 from './profile_img_1.png';
-import profile_img_2 from './profile_img_2.png';
+// import profile_img_2 from './profile_img_2.png';
 import step_icon_1 from './step_icon_1.svg';
 import step_icon_2 from './step_icon_2.svg';
 import step_icon_3 from './step_icon_3.svg';
@@ -25,8 +26,9 @@ import profile_icon from './profile_icon.png';
 
 // 📦 All assets exported as a typed object
 export const assets: Record<string, string> = {
-  logo,
-  logo_icon,
+  imagine_logo,
+  // logo,
+  // logo_icon,
   facebook_icon,
   instagram_icon,
   twitter_icon,
@@ -38,7 +40,7 @@ export const assets: Record<string, string> = {
   sample_img_4,
   sample_img_5,
   profile_img_1,
-  profile_img_2,
+  // profile_img_2,
   step_icon_1,
   step_icon_2,
   step_icon_3,

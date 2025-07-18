@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
     return (
         <div className='flex items-center justify-between py-4'>
             <Link to='/'>
-                <img src={assets.logo} alt='' className='w-28 sm:w-32 lg:w-40' />
+                <img src={assets.imagine_logo} alt='' className='w-22 sm:w-28 lg:w-30' />
             </Link>
             <div>
                 {
@@ -41,7 +41,7 @@ const Navbar: React.FC = () => {
                             </div>
                         </div>
                     ) : (
-                        <div className='flex items-center gap-2 sm:gap-5'>
+                        <div className='flex items-center gap-3 sm:gap-5'>
                             <p onClick={() => navigate('/buy-unknown-credit')} className='cursor-pointer text-gray-300'>Pricing</p>
                             <button onClick={() => dispatch(setShowLogin(true))} className='cursor-pointer bg-orange-500 text-black px-7 py-2 sm:px-10 text-sm font-medium rounded-full'>Login</button>
                         </div>
