@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "ts-node-dev --env-file-if-exists=.env --respawn ./src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js"
+    "start": "node --env-file-if-exists=.env dist/app.js"
   },
   "devDependencies": {
     "@firebase/firestore-types": "^3.0.3",
