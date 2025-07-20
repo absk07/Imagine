@@ -6,6 +6,7 @@ import { useLoadUnknownCredit } from '../hooks/useGetUC';
 import { useRpzPaymentMutation, useRpzPaymentVerifyMutation } from '../api/paymentApi';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { assets } from '../assets/assets';
 
 export interface Plan {
   id: string;
@@ -13,6 +14,13 @@ export interface Plan {
   credits: number;
   desc: string;
 }
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
+
 
 export const plans: Plan[] = [
   {
@@ -45,14 +53,31 @@ const Credit: React.FC = () => {
 
   const navigate = useNavigate();
 
+  const loadRazorpayScript = (): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
   const initRpzPayment = async (order: any) => {
+    const isLoaded = await loadRazorpayScript();
+
+    if (!isLoaded) {
+      toast.error('Failed to load Razorpay SDK. Please try again.');
+      return;
+    }
+
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
       amount: order.amount,
       currency: order.currency,
       name: 'Imagine',
       description: 'Unknown Credit Transaction',
-      // image: 'http://example.com/your_logo',
+      image: assets.imagine_logo,
       order_id: order.id,
       receipt: order.receipt,
       handler: async (response: any) => {
@@ -70,7 +95,7 @@ const Credit: React.FC = () => {
       }
     };
 
-    const rzp = new Razorpay(options);
+    const rzp = new window.Razorpay(options);
 
     rzp.open();
   };
@@ -118,7 +143,7 @@ const Credit: React.FC = () => {
               {plan.credits} credits
             </p>
             <button onClick={() => razorpayPayment(plan.id)} className='w-full bg-black text-orange-600 mt-8 text-sm rounded-md py-2.5 min-w-52 cursor-pointer'>
-              {user ? 'Purchased' : 'Buy Plan'}
+              Buy Plan
             </button>
           </div>
         ))}
